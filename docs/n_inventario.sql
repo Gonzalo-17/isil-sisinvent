@@ -152,6 +152,7 @@ CREATE TABLE IF NOT EXISTS `ficha` (
   `Fecha_registro` datetime DEFAULT NULL,
   `ID_usuario_modificador` varchar(90) DEFAULT NULL,
   `Fecha_modificacion` datetime DEFAULT NULL,
+  `Estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_ficha`),
   KEY `ID_sede` (`ID_sede`),
   KEY `ID_torre` (`ID_torre`),
@@ -187,16 +188,16 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `after_ficha_insert`;
 DELIMITER $$
 CREATE TRIGGER `after_ficha_insert` AFTER INSERT ON `ficha` FOR EACH ROW BEGIN
-    INSERT INTO HISTORIAL_FICHA (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, Tipo_movimiento)
-    VALUES (NEW.ID_ficha, NEW.ID_sede, NEW.ID_torre, NEW.Salon, NEW.ID_almacen, NEW.ID_equipo, NEW.Descripcion, NEW.ID_marca, NEW.ID_modelo, NEW.Numero_serie, NEW.Codigo_isil, NEW.ID_usuario, NEW.ID_operatividad, NEW.Observaciones, NOW(), 'Inserción');
+    INSERT INTO HISTORIAL_FICHA (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Imagen, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, Tipo_movimiento, Estado)
+    VALUES (NEW.ID_ficha, NEW.ID_sede, NEW.ID_torre, NEW.Salon, NEW.ID_almacen, NEW.ID_equipo, NEW.Descripcion, NEW.ID_marca, NEW.ID_modelo, NEW.Numero_serie, NEW.Codigo_isil, NEW.Imagen, NEW.ID_usuario, NEW.ID_operatividad, NEW.Observaciones, NOW(), 'Inserción',NEW.Estado);
 END
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_ficha_update`;
 DELIMITER $$
 CREATE TRIGGER `after_ficha_update` AFTER UPDATE ON `ficha` FOR EACH ROW BEGIN
-    INSERT INTO HISTORIAL_FICHA (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, ID_usuario, ID_usuario_modificador, ID_operatividad, Observaciones, Fecha_registro, Tipo_movimiento)
-    VALUES (NEW.ID_ficha, NEW.ID_sede, NEW.ID_torre, NEW.Salon, NEW.ID_almacen, NEW.ID_equipo, NEW.Descripcion, NEW.ID_marca, NEW.ID_modelo, NEW.Numero_serie, NEW.Codigo_isil, NEW.ID_usuario, NEW. ID_usuario_modificador, NEW.ID_operatividad, NEW.Observaciones, NOW(), 'Edición');
+    INSERT INTO HISTORIAL_FICHA (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Imagen, ID_usuario, ID_usuario_modificador, ID_operatividad, Observaciones, Fecha_registro, Tipo_movimiento, Estado)
+    VALUES (NEW.ID_ficha, NEW.ID_sede, NEW.ID_torre, NEW.Salon, NEW.ID_almacen, NEW.ID_equipo, NEW.Descripcion, NEW.ID_marca, NEW.ID_modelo, NEW.Numero_serie, NEW.Codigo_isil, NEW.Imagen, NEW.ID_usuario, NEW. ID_usuario_modificador, NEW.ID_operatividad, NEW.Observaciones, NOW(), 'Edición', NEW.Estado);
 END
 $$
 DELIMITER ;
@@ -221,12 +222,14 @@ CREATE TABLE IF NOT EXISTS `historial_ficha` (
   `ID_modelo` int(11) NOT NULL,
   `Numero_serie` varchar(30) DEFAULT NULL,
   `Codigo_isil` varchar(30) DEFAULT NULL,
+  `Imagen` mediumblob,
   `ID_usuario` int(11) NOT NULL,
   `ID_usuario_modificador` varchar(90) DEFAULT NULL,
   `ID_operatividad` int(11) NOT NULL,
   `Observaciones` varchar(50) DEFAULT NULL,
   `Fecha_registro` datetime DEFAULT NULL,
   `Tipo_movimiento` varchar(20) DEFAULT NULL,
+  `Estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_historial`),
   KEY `ID_ficha` (`ID_ficha`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;

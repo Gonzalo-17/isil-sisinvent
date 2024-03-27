@@ -107,10 +107,6 @@ function editar(ID_usuario){
         $('#Correo').val(data.Correo);
         $('#Numero').val(data.Numero);
         $('#Usuario').val(data.Usuario);
-        $('#contrasena').val(data.contrasena);
-
-        
-        
     }); 
 
     /* TODO: Mostrar Modal */
