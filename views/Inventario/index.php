@@ -48,7 +48,6 @@ if (isset($_SESSION["ID_usuario"])) {
                             <th style="width: 1%;">Fecha</th>
                             <th style="width: 1%;">Usuario modificador</th>
                             <th style="width: 1%;">Fecha modificación</th>
-                            <th style="width: 1%;">Estado</th>
 
                             <th class="text-center" style="width: 5%;">Editar</th>
                             <th class="text-center" style="width: 5%;">Eliminar</th>

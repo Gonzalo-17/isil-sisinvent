@@ -32,7 +32,8 @@ class Ficha extends Conectar {
                 ficha.Observaciones, 
                 ficha.Fecha_registro,
                 ficha.ID_usuario_modificador, 
-                ficha.Fecha_modificacion
+                ficha.Fecha_modificacion,
+                ficha.Est
                 FROM
                 ficha
                 INNER JOIN sede on sede.ID_sede = ficha.ID_sede
@@ -42,7 +43,9 @@ class Ficha extends Conectar {
                 INNER JOIN marca on marca.ID_marca = ficha.ID_marca
                 INNER JOIN modelo on modelo.ID_modelo = ficha.ID_modelo
                 INNER JOIN usuario on usuario.ID_usuario = ficha.ID_usuario 
-                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad";
+                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad
+                WHERE 
+                Est=1";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();
@@ -78,7 +81,8 @@ class Ficha extends Conectar {
                 ficha.Observaciones, 
                 ficha.Fecha_registro,
                 ficha.ID_usuario_modificador, 
-                ficha.Fecha_modificacion
+                ficha.Fecha_modificacion,
+                ficha.Est
                 FROM
                 ficha
                 INNER JOIN sede on sede.ID_sede = ficha.ID_sede
@@ -88,7 +92,9 @@ class Ficha extends Conectar {
                 INNER JOIN marca on marca.ID_marca = ficha.ID_marca
                 INNER JOIN modelo on modelo.ID_modelo = ficha.ID_modelo
                 INNER JOIN usuario on usuario.ID_usuario = ficha.ID_usuario 
-                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad";
+                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad
+                WHERE 
+                Est=1";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();
