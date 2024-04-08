@@ -34,7 +34,14 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Tipo_operatividad"];
             $sub_array[] = $row["Observaciones"];
             $sub_array[] = $row["Fecha_registro"];
-            $sub_array[] = $row["Tipo_movimiento"];
+
+            if ($row["Tipo_movimiento"] == "Inserción") {
+                $sub_array[] = '<span class="label label-pill label-success">Inserción</span>';
+            } else if ($row["Tipo_movimiento"] == "Edición") {
+                $sub_array[] = '<span class="label label-pill label-warning">Edición</span>';
+            } else {
+                $sub_array[] = '<span class="label label-pill label-danger">Eliminación</span>';
+            }
             $data[] = $sub_array;
         }
         $results = array(
